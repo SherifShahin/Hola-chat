@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.downloader.hola.settings"
+    android:background="@android:color/white"
+    >
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@mipmap/profile"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/white"
+        android:layout_marginTop="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:id="@+id/linearLayout2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="user name :"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="2dp"
+            android:textSize="15dp"
+            android:text="user"
+            android:id="@+id/settings_username"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="138dp"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="status :"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="2dp"
+            android:id="@+id/settings_status"
+            android:text="Hi there iam using hola chat app !"
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/set_status"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/pen"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:text="Change Image"
+        android:textSize="12dp"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_red_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/change_image"
+        />
+
+</RelativeLayout>

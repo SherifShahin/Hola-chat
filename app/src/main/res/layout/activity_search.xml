@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.downloader.hola.Search"
+    android:background="@android:color/white"
+    >
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Search"
+    android:textColorHint="@color/colorPrimaryDark"
+    android:layout_marginTop="27dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginRight="70dp"
+    android:layout_marginLeft="10dp"
+    android:textSize="15dp"
+    android:padding="9dp"
+    android:textColor="@android:color/black"
+    android:background="@drawable/search_bg"
+    android:id="@+id/search_text" />
+
+    <ImageButton
+        android:id="@+id/search_Button"
+        android:layout_width="38dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/white"
+        android:src="@mipmap/search_ic"
+        android:layout_alignTop="@+id/search_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_RecycleView"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/search_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

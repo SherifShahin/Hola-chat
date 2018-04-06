@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.downloader.hola.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:id="@+id/toolbar2">
+
+
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_tab_layout"
+            >
+        </android.support.design.widget.TabLayout>
+
+</android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tabPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar2"
+        >
+
+    </android.support.v4.view.ViewPager>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_gravity="bottom|end"
+        android:elevation="6dp"
+        android:src="@android:drawable/ic_menu_search"
+        android:visibility="visible"
+        app:backgroundTint="@color/colorPrimary"
+        app:borderWidth="0dp"
+        app:pressedTranslationZ="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
+
+
+
+</RelativeLayout>

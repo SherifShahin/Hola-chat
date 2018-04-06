@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context="com.downloader.hola.LogIn">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:src="@drawable/smilleyface"
+            android:textColor="@android:color/black"
+            android:textSize="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_above="@+id/EditTextEmail"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="email "
+            android:textColorHint="@android:color/white"
+            android:id="@+id/EditTextEmail"
+            android:paddingLeft="13dp"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
+            android:background="@drawable/rounded_white"
+            android:layout_above="@+id/EditTextPassword"
+            android:layout_alignLeft="@+id/EditTextPassword"
+            android:layout_alignStart="@+id/EditTextPassword"
+            android:layout_alignRight="@+id/EditTextPassword"
+            android:layout_alignEnd="@+id/EditTextPassword" />
+
+
+        <EditText
+            android:id="@+id/EditTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="13dp"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
+            android:hint="password"
+            android:textColorHint="@android:color/white"
+            android:inputType="textPassword"
+            android:layout_margin="30dp"
+            android:background="@drawable/rounded_white"
+            android:layout_above="@+id/buttonSignIn"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@drawable/loginbutton"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:id="@+id/buttonSignIn"
+            android:fontFamily="cursive"
+            android:layout_marginBottom="111dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Register!"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:id="@+id/TextViewRegister"
+            android:layout_marginTop="53dp"
+            android:layout_below="@+id/EditTextPassword"
+            android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.downloader.hola.profile">
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User name"
+        android:textSize="30dp"
+        android:textColor="#ffcc00"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/profile_image1"
+        android:layout_centerHorizontal="true"
+        android:transitionName="nameTransition"
+        />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="status"
+        android:textColor="#ffcc00"
+        android:textSize="20dp"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:transitionName="statusTransition"
+        />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image1"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@mipmap/profile"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/white"
+        android:layout_marginTop="31dp"
+        android:transitionName="imageTransition"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/Friend_request"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_height="60dp"
+        android:src="@drawable/send_request"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@+id/Delete_Request"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/Delete_Request"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="53dp"
+        android:src="@drawable/reject"
+        android:visibility="invisible"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/Friend_request"
+        android:layout_alignStart="@+id/Friend_request"
+        android:layout_alignRight="@+id/Friend_request"
+        android:layout_alignEnd="@+id/Friend_request" />
+</RelativeLayout>
