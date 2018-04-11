@@ -32,7 +32,11 @@ public class set_Status extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set__status);
 
+        String status=getIntent().getStringExtra("user_status");
+
         set_status=(EditText) findViewById(R.id.set_status);
+        set_status.setText(status);
+
         change_status=(Button) findViewById(R.id.change_status);
         cancel=(Button)findViewById(R.id.cancel);
 

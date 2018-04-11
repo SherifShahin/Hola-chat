@@ -1,11 +1,13 @@
 package com.downloader.hola;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -72,9 +75,11 @@ public class chatActivity extends AppCompatActivity
     private DatabaseReference messagesReference;
 
     private StorageReference image_storage;
+    private StorageReference video_storage;
 
-    private static final int Total_items_to_load=10;
+    private static final int Total_items_to_load=20;
     private static final int gallery_pick=1;
+    private static final int gallery_pick_video=2;
 
     private int current_page=1;
 
@@ -116,6 +121,7 @@ public class chatActivity extends AppCompatActivity
         messagesReference=FirebaseDatabase.getInstance().getReference();
 
         image_storage= FirebaseStorage.getInstance().getReference();
+        video_storage=FirebaseStorage.getInstance().getReference();
 
         muser_name=(TextView) findViewById(R.id.custom_bar_title);
         last_seen=(TextView) findViewById(R.id.custom_bar_lastseen);
@@ -238,11 +244,42 @@ public class chatActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent gallery_intent=new Intent();
-                gallery_intent.setType("image/*");
-                gallery_intent.setAction(Intent.ACTION_GET_CONTENT);
 
-                startActivityForResult(Intent.createChooser(gallery_intent,"Select image :D"),gallery_pick);
+                CharSequence[] charSequence=new CharSequence[]{"image","video"};
+
+                AlertDialog.Builder builder=new AlertDialog.Builder(chatActivity.this);
+
+                builder.setTitle("Send");
+
+                builder.setItems(charSequence, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                //intent to pick images
+                                if(which == 0)
+                                {
+
+                                    Intent gallery_intent = new Intent();
+                                    gallery_intent.setType("image/*");
+                                    gallery_intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                                    startActivityForResult(Intent.createChooser(gallery_intent,"Select image :D"),gallery_pick);
+                                }
+
+                                //intent to pick video
+                                if(which == 1)
+                                {
+
+                                    Intent gallery_intent = new Intent();
+                                    gallery_intent.setType("video/*");
+                                    gallery_intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                                    startActivityForResult(Intent.createChooser(gallery_intent,"Select video :D"),gallery_pick_video);
+                                }
+                            }
+                        });
+
+                builder.show();
             }
         });
     }
@@ -254,6 +291,7 @@ public class chatActivity extends AppCompatActivity
     {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //result of image intent
         if(requestCode == gallery_pick && resultCode == RESULT_OK)
         {
             Uri imageUri = data.getData();
@@ -312,6 +350,65 @@ public class chatActivity extends AppCompatActivity
 
 
         }
+
+        // result of videos intent
+        if(requestCode == gallery_pick_video && data != null)
+        {
+            Uri VideoUri = data.getData();
+
+
+
+            final String Current_user_ref="messages/"+current_user+"/"+user_id;
+
+            final String Chat_user_ref="messages/"+user_id+"/"+current_user;
+
+            DatabaseReference user_message_push=userReference.child("messages").child(current_user).child(user_id).push();
+
+            final String push_id=user_message_push.getKey();
+
+            StorageReference filepath=video_storage.child("message_videos").child(push_id +".mp4");
+
+            filepath.putFile(VideoUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
+                {
+                    if(task.isSuccessful())
+                    {
+
+                        String download_url=task.getResult().getDownloadUrl().toString();
+
+                        Map messageMap=new HashMap();
+
+                        messageMap.put("message",download_url);
+                        messageMap.put("seen",false);
+                        messageMap.put("type","video");
+                        messageMap.put("time",ServerValue.TIMESTAMP);
+                        messageMap.put("from",current_user);
+
+                        Map messageUserMap=new HashMap();
+
+                        messageUserMap.put(Current_user_ref+"/"+ push_id,messageMap);
+                        messageUserMap.put(Chat_user_ref+"/"+ push_id,messageMap);
+
+                        userReference.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
+                            {
+                                if(databaseError == null)
+                                    message_text.setText("");
+
+                                if(databaseError != null)
+                                {
+                                    Log.d("message_LOG",databaseError.getMessage().toString());
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+        }
+
     }
 
 

@@ -42,6 +42,8 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
+import static android.R.attr.data;
+
 public class settings extends AppCompatActivity implements View.OnClickListener
 {
     private DatabaseReference databaseReference;
@@ -52,6 +54,7 @@ public class settings extends AppCompatActivity implements View.OnClickListener
     private TextView user_status;
     private CircleImageView user_image;
 
+    private Button set_name;
     private Button set_status;
     private Button change_image;
     private ProgressDialog progressDialog;
@@ -70,9 +73,11 @@ public class settings extends AppCompatActivity implements View.OnClickListener
         username=(TextView) findViewById(R.id.settings_username);
         user_status=(TextView) findViewById(R.id.settings_status);
         user_image=(CircleImageView) findViewById(R.id.profile_image);
+        set_name=(Button) findViewById(R.id.set_name);
         set_status=(Button) findViewById(R.id.set_status);
         change_image=(Button) findViewById(R.id.change_image);
 
+        set_name.setOnClickListener(this);
         set_status.setOnClickListener(this);
         change_image.setOnClickListener(this);
 
@@ -141,10 +146,43 @@ public class settings extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
+        if(v == set_name)
+        {
+            final Intent set_name_intent=new Intent(getApplicationContext(),set_name.class);
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    String name=dataSnapshot.child("name").getValue().toString().trim();
+
+                    set_name_intent.putExtra("user_name",name);
+
+                    startActivity(set_name_intent);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            });
+        }
+
         if(v == set_status)
         {
-            Intent intent =new Intent(getApplicationContext(),set_Status.class);
-            startActivity(intent);
+            final Intent intent =new Intent(getApplicationContext(),set_Status.class);
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String status=dataSnapshot.child("status").getValue().toString();
+
+                    intent.putExtra("user_status",status);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         if(v == change_image)

@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.downloader.hola.set_Status">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +18,7 @@
         android:id="@+id/set_status"
         />
 
-
+</ScrollView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

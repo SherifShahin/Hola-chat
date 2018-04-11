@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme2"
-            >
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +47,11 @@
             android:name=".chatActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme2" />
-        <activity android:name=".Search"
+        <activity
+            android:name=".Search"
+            android:theme="@style/AppTheme2" />
+        <activity android:name=".set_name" />
+        <activity android:name=".Image_viewer"
             android:theme="@style/AppTheme2"
             ></activity>
     </application>

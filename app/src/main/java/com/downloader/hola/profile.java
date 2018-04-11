@@ -117,7 +117,7 @@ public class profile extends AppCompatActivity
             {
                 String name=dataSnapshot.child("name").getValue().toString();
                 String status=dataSnapshot.child("status").getValue().toString();
-                String image=dataSnapshot.child("image").getValue().toString();
+                final String image=dataSnapshot.child("image").getValue().toString();
                 String thumb_image=dataSnapshot.child("thumb_image").getValue().toString();
 
                 uname=(TextView) findViewById(R.id.name);
@@ -127,6 +127,20 @@ public class profile extends AppCompatActivity
                 ustatus.setText(status);
 
                 Picasso.with(profile.this).load(thumb_image).placeholder(R.mipmap.profile).into(uimage);
+
+                uimage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        if(uid.equals(user_id) || current_state.equals("friends"))
+                        {
+                            Intent image_viewer= new Intent(getApplicationContext(),Image_viewer.class);
+                            image_viewer.putExtra("image",image);
+                            startActivity(image_viewer);
+                        }
+
+                    }
+                });
 
 
                 //Request Feature
