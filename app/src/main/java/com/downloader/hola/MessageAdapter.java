@@ -1,5 +1,7 @@
 package com.downloader.hola;
 
+import android.content.Context;
+import android.content.Intent;
 import android.drm.DrmStore;
 import android.graphics.Color;
 import android.net.Uri;
@@ -69,7 +71,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
        public CircleImageView message_image;
        public TextView message_time;
        public ImageView imageView;
-       public VideoView videoView;
+       public ImageView videoView;
 
 
 
@@ -81,7 +83,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
            message_text=(TextView) itemView.findViewById(R.id.message_single_text);
            message_image=(CircleImageView) itemView.findViewById(R.id.message_single_profile);
            imageView=(ImageView) itemView.findViewById(R.id.send_image);
-           videoView=(VideoView) itemView.findViewById(R.id.send_video);
+           videoView=(ImageView) itemView.findViewById(R.id.send_video);
 
        }
    }
@@ -91,9 +93,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     {
         String current_user=FirebaseAuth.getInstance().getUid().toString();
 
-        Messages c=messagesList.get(position);
+        final Messages c=messagesList.get(position);
 
 
+        final Context context=holder.videoView.getContext();
         String from_user=c.getFrom();
 
         String message_type=c.getType();
@@ -139,7 +142,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.imageView.setVisibility(View.INVISIBLE);
             holder.videoView.setVisibility(View.INVISIBLE);
 
-            ViewGroup.LayoutParams params = holder.videoView.getLayoutParams();
+    /**        ViewGroup.LayoutParams params = holder.videoView.getLayoutParams();
             // Changes the height and width to the specified *dp*
 
             final float scale = holder.videoView.getContext().getResources().getDisplayMetrics().density;
@@ -149,7 +152,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             params.height = height;
             params.width = width;
-            holder.videoView.setLayoutParams(params);
+            holder.videoView.setLayoutParams(params);  **/
 
 
             holder.message_text.setText(c.getMessage());
@@ -161,7 +164,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.message_text.setVisibility(View.INVISIBLE);
             holder.videoView.setVisibility(View.INVISIBLE);
 
-            ViewGroup.LayoutParams params = holder.videoView.getLayoutParams();
+    /**        ViewGroup.LayoutParams params = holder.videoView.getLayoutParams();
             // Changes the height and width to the specified *dp*
 
             final float scale = holder.videoView.getContext().getResources().getDisplayMetrics().density;
@@ -171,7 +174,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             params.height = height;
             params.width = width;
-            holder.videoView.setLayoutParams(params);
+            holder.videoView.setLayoutParams(params); **/
 
 
             Picasso.with(holder.imageView.getContext()).load(c.getMessage()).into(holder.imageView);
@@ -184,13 +187,32 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.message_text.setVisibility(View.INVISIBLE);
             holder.imageView.setVisibility(View.INVISIBLE);
 
-            ViewGroup.LayoutParams params = holder.videoView.getLayoutParams();
-            // Changes the height and width to the specified *dp*
+            Uri videourl = Uri.parse(c.getMessage());
+
+            holder.videoView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent video_player=new Intent(context,Play_Video.class);
+
+
+                    video_player.putExtra("video_uri",c.getMessage());
+
+                    context.startActivity(video_player);
+
+
+
+
+                }
+            });
+
+     //       ViewGroup.LayoutParams params = holder.videoView.getLayoutParams();
+  /**          // Changes the height and width to the specified *dp*
 
             final float scale = holder.videoView.getContext().getResources().getDisplayMetrics().density;
             int height = (int) (260 * scale + 0.5f);
 
-            int width=(int)(200 * scale +0.5f);
+            int width=(int)(240 * scale +0.5f);
 
             params.height = height;
             params.width = width;
@@ -208,7 +230,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 {
                     holder.videoView.start();
                 }
-            });
+            }); **/
         }
 
 

@@ -51,9 +51,14 @@
             android:name=".Search"
             android:theme="@style/AppTheme2" />
         <activity android:name=".set_name" />
-        <activity android:name=".Image_viewer"
-            android:theme="@style/AppTheme2"
-            ></activity>
+        <activity
+            android:name=".Image_viewer"
+            android:theme="@style/AppTheme2" />
+        <activity android:name=".Play_Video"
+            android:label="Video"
+            >
+
+        </activity>
     </application>
 
 </manifest>
